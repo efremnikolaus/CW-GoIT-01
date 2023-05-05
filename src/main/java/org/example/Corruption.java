@@ -38,5 +38,13 @@ public class Corruption {
         if (accounts.isEmpty() || accounts.size() < 2) {
             throw new IllegalArgumentException("Must be several accounts!");
         }
+        /*Проверка на максимальный размер списка счетов*/
+        if (accounts.stream().anyMatch(x -> x > 70000)) {
+            throw new IllegalArgumentException("Accounts should not be greater than 70000!");
+        }
+        /*Проверка на наличие Infinity в списке счетов*/
+        if (accounts.stream().anyMatch(x -> x.isInfinite())) {
+            throw new IllegalArgumentException("Oooppss.. mistake :(");
+        }
     }
 }
