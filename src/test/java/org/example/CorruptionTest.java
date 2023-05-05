@@ -78,4 +78,24 @@ class CorruptionTest {
 
         Assertions.assertEquals(expected, actual);
     }
+    @Test
+    void inputValidationMaxValuesTest() {
+        int initialPercent = 5;
+        List<Double> initialAccounts = new ArrayList<>();
+        initialAccounts.add(50d);
+        initialAccounts.add(70001d);
+
+        Assertions.assertThrows(IllegalArgumentException.class,
+                () -> new Corruption().calculate(initialPercent, initialAccounts));
+    }
+    @Test
+    void invalidAccountsTest() {
+        int initialPercent = 5;
+        List<Double> initialAccounts = new ArrayList<>();
+        initialAccounts.add(50d);
+        initialAccounts.add(Double.POSITIVE_INFINITY);
+
+        Assertions.assertThrows(IllegalArgumentException.class,
+                () -> new Corruption().calculate(initialPercent, initialAccounts));
+    }
 }
